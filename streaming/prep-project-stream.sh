@@ -5,6 +5,7 @@ if [[ -z "${GOOGLE_CLOUD_PROJECT}" ]]; then
     echo "Project has not been set! Running below command:"
     echo "   gcloud config set project PROJECT_ID"
     echo "(where PROJECT_ID is the desired project)"
+    gcloud config set project $(gcloud config get-value project)
 else
     echo "Project Name: $GOOGLE_CLOUD_PROJECT"
     gcloud storage buckets create gs://$GOOGLE_CLOUD_PROJECT"-bucket" --soft-delete-duration=0
