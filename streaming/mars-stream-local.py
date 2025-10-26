@@ -21,13 +21,13 @@ def run():
         {"name": "ipaddr", "type": "STRING"},
         {"name": "action", "type": "STRING"},
         {"name": "srcacct", "type": "STRING"},
-        {"name": "destacct:, "type": "STRING"},
+        {"name": "destacct":, "type": "STRING"},
         {"name": "amount", "type": "NUMERIC"},
         {"name": "customername", "type": "STRING"}] }
 
     p = beam.Pipeline(argv=argv)
     subscription = "projects/" + projectname + "/subscriptions/activities-subscription"
-    outputtable = projectname + ":mars.raw"
+    outputtable = projectname + ":mars.activity"
     
     print("Starting Beam Job - next step start the pipeline")
     (p
