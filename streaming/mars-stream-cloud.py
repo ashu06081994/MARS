@@ -52,7 +52,7 @@ def run():
      | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
      | 'Write Output' >> beam.io.WriteToBigQuery(outputtable,schema=bq_schema)
      )
-    p.run()
+    p.run().wait_until_finish()
 
 
 if __name__ == '__main__':
