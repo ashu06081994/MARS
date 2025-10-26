@@ -2,9 +2,11 @@
 import apache_beam as beam
 import os
 import datetime
+import json
 
 def processline(line):
-    outputrow = {'message' : line}
+    print(line)
+    outputrow=json.loads(line)
     yield outputrow
 
 
@@ -28,6 +30,15 @@ def run():
       '--machine_type=e2-standard-2',
       '--save_main_session'
     ]
+    bq_schema = {
+    "fields": [
+        {"name": "timestamp", "type": "STRING"},
+        {"name": "ipaddr", "type": "STRING"},
+        {"name": "action", "type": "STRING"},
+        {"name": "srcacct", "type": "STRING"},
+        {"name": "destacct", "type": "STRING"},
+        {"name": "amount", "type": "NUMERIC"},
+        {"name": "customername", "type": "STRING"}] }
 
     p = beam.Pipeline(argv=argv)
     subscription = "projects/" + projectname + "/subscriptions/activities-subscription"
@@ -37,7 +48,7 @@ def run():
     (p
      | 'Read Messages' >> beam.io.ReadFromPubSub(subscription=subscription)
      | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
-     | 'Write Output' >> beam.io.WriteToBigQuery(outputtable)
+     | 'Write Output' >> beam.io.WriteToBigQuery(outputtable,schema=bq_schema))
      )
     p.run()
 
