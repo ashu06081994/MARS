@@ -42,7 +42,7 @@ def run():
 
     p = beam.Pipeline(argv=argv)
     subscription = "projects/" + projectname + "/subscriptions/activities-subscription"
-    outputtable = projectname + ":mars.raw"
+    outputtable = projectname + ":mars.activities"
     
     print("Starting Beam Job - next step start the pipeline")
     (p
