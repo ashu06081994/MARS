@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import apache_beam as beam
 import os
-import datetime
 import json
+import datetime
 
 def processline(line):
     print(line)
