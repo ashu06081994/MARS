@@ -9,11 +9,11 @@ def processline(line):
 def run():
     projectname = os.getenv('GOOGLE_CLOUD_PROJECT')
     bucketname = os.getenv('GOOGLE_CLOUD_PROJECT') + '-bucket'
-    projectnumber = os.getenv('GOOGLE_CLOUD_PROJECT')
     jobname = 'mars-job' + datetime.datetime.now().strftime("%Y%m%d%H%M")
     region = 'us-central1'
 
     # https://cloud.google.com/dataflow/docs/reference/pipeline-options
+    # '--service_account_email=marssa@' + projectname + ".iam.gserviceaccount.com",
     argv = [
       '--runner=DataflowRunner',
       '--project=' + projectname,
@@ -27,8 +27,8 @@ def run():
     ]
 
     p = beam.Pipeline(argv=argv)
-    # input = 'gs://mars-sample/*.csv'
-    input = 'gs://mars-production/*.csv'
+    input = 'gs://mars-sample/*.csv'
+    # input = 'gs://mars-production/*.csv'
     output = 'gs://' + bucketname + '/output/output'
 
     (p
