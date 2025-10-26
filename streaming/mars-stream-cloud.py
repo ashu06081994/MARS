@@ -48,7 +48,7 @@ def run():
     (p
      | 'Read Messages' >> beam.io.ReadFromPubSub(subscription=subscription)
      | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
-     | 'Write Output' >> beam.io.WriteToBigQuery(outputtable,schema=bq_schema))
+     | 'Write Output' >> beam.io.WriteToBigQuery(outputtable,schema=bq_schema)
      )
     p.run()
 
