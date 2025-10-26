@@ -22,7 +22,7 @@ def run():
    # '--service_account_email=marssa@' + projectname + ".iam.gserviceaccount.com"
     argv = [
       '--streaming',
-      '--runner=DataflowRunner',
+      '--runner=DirectRunner',
       '--project=' + projectname,
       '--job_name=' + jobname,
       '--region=' + region,
