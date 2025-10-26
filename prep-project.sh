@@ -12,9 +12,6 @@ else
     echo "Project Name: $GOOGLE_CLOUD_PROJECT"
     gcloud storage buckets create gs://$GOOGLE_CLOUD_PROJECT"-bucket" --soft-delete-duration=0
     gcloud services enable dataflow.googleapis.com
-    PROJECT_ID=$(gcloud config get-value project)
-    SET PROJECT_NUMBER=$(gcloud projects list --filter="$PROJECT_ID" --format="value(PROJECT_NUMBER)")
-    SET serviceAccount=""$PROJECT_NUMBER"-compute@developer.gserviceaccount.com"
     # gcloud iam service-accounts create marssa
     # sleep 1
     # gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member serviceAccount:marssa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/editor
