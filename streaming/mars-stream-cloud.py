@@ -3,9 +3,11 @@ import apache_beam as beam
 import os
 import json
 import datetime
+import logging
+
 
 def processline(line):
-    print(line)
+    logging.info(f"Received data: {line}")
     outputrow=json.loads(line)
     yield outputrow
 
