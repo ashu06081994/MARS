@@ -6,12 +6,12 @@ import datetime
 import logging
 
 def processline(line):
-    print(f"Received line: {line}")  # Log the raw input
+    logging.info(f"Received line: {line}")  # Log the raw input
     try:
         outputrow = json.loads(line)  # Attempt to load the JSON
         yield outputrow
     except json.JSONDecodeError as e:
-        print(f"JSON decode error: {e} for line: {line}")  # Log the error and line
+        logging.error(f"JSON decode error: {e} for line: {line}")  # Log the error and line
         # Optionally, handle the error (e.g., skip the line or yield a default value)
 
 
@@ -25,7 +25,7 @@ def run():
    # '--service_account_email=marssa@' + projectname + ".iam.gserviceaccount.com"
     argv = [
       '--streaming',
-      '--runner=DirectRunner',
+      '--runner=DataflowRunner',
       '--project=' + projectname,
       '--job_name=' + jobname,
       '--region=' + region,
@@ -55,7 +55,7 @@ def run():
      | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
      | 'Write Output' >> beam.io.WriteToBigQuery(outputtable,schema=bq_schema)
      )
-    p.run().wait_until_finish()
+    p.run()
 
 
 if __name__ == '__main__':
