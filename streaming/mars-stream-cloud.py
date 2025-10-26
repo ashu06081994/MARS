@@ -5,11 +5,14 @@ import json
 import datetime
 import logging
 
-
 def processline(line):
-    logging.info(f"Received data: {line}")
-    outputrow=json.loads(line)
-    yield outputrow
+    logging.info(f"Received line: {line}")  # Log the raw input
+    try:
+        outputrow = json.loads(line)  # Attempt to load the JSON
+        yield outputrow
+    except json.JSONDecodeError as e:
+        logging.error(f"JSON decode error: {e} for line: {line}")  # Log the error and line
+        # Optionally, handle the error (e.g., skip the line or yield a default value)
 
 
 def run():
