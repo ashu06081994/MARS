@@ -9,6 +9,7 @@ def processline(line):
 def run():
     projectname = os.getenv('GOOGLE_CLOUD_PROJECT')
     bucketname = os.getenv('GOOGLE_CLOUD_PROJECT') + '-bucket'
+    projectnumber = os.getenv('GOOGLE_CLOUD_PROJECT')
     jobname = 'mars-job' + datetime.datetime.now().strftime("%Y%m%d%H%M")
     region = 'us-central1'
 
@@ -22,7 +23,6 @@ def run():
       '--temp_location=gs://' + bucketname + '/temploc/',
       '--max_num_workers=2',
       '--machine_type=e2-standard-2',
-      '--service_account_email=marssa@' + projectname + ".iam.gserviceaccount.com",
       '--save_main_session'
     ]
 
