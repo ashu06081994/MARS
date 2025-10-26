@@ -21,7 +21,7 @@ def run():
         {"name": "ipaddr", "type": "STRING"},
         {"name": "action", "type": "STRING"},
         {"name": "srcacct", "type": "STRING"},
-        {"name": "destacct":, "type": "STRING"},
+        {"name": "destacct": "type": "STRING"},
         {"name": "amount", "type": "NUMERIC"},
         {"name": "customername", "type": "STRING"}] }
 
