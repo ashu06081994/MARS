@@ -3,7 +3,7 @@
 echo $GOOGLE_CLOUD_PROJECT
 
 sudo pip3 install -r requirements.txt
-gcloud storage cp gs://mars-sample/*.csv sample/
+gcloud storage cp gs://moonbank-mars-sample/*.csv sample/
 rm -rf output
 python3 mars-local.py
 gcloud storage cp output/* gs://$GOOGLE_CLOUD_PROJECT"-bucket/local/"
